@@ -1,12 +1,13 @@
 # Multiplatform project in Kotlin
 One of the key capabilities of Kotlin's multiplatform code is a way for common code to depend on platform-specific declarations. 
-Kotlin provides a mechanism of expected and actual declarations in which one module can define *expected declarations* and a platform specific modulecan provide the *actual declarations*.
+Kotlin provides a mechanism of expected and actual declarations in which one module can define *expected declarations* and a platform specific module can provide the *actual declarations*.
 
+Code, common amongst multiple platforms can be placed in common modules, while platform-specific code could be placed
+into platform-specific modules, and expect/actual declarations can bind them together in developer-friendly way.
 
 ## Prerequisites
-
-- `Kotlin` is the build system for Kotlin ([how to install](https://gradle.org/install/)).
-- `Gradle` is the build system for Kotlin ([how to install](https://gradle.org/install/)).
+- `Kotlin` version 1.2.51.
+- `Gradle` is the used build system ([how to install](https://gradle.org/install/)).
 
 ### 2. Multiplatform library for Node/JVM 
 The multiplatform library will include three subprojects:
@@ -73,6 +74,17 @@ Create a `HelloWorld` class with the actual implementations:
     }
 
 ### 3. Proof of concept
+In order to test the common libraries I've implemented 2 simple applications:
+ * `node-app` - A Node JS application
+ * `jvm-app` - A Java main class.
+
+For the *js* module I suggest to build the library locally using command:
+
+    npm install -g
+
+Then on *node-app* folder install dependencies and run the application:
+
+    npm install -g && npm start
 
 #### 3.1 JVM Application
 A simple standalone java application has been created:
