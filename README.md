@@ -144,13 +144,9 @@ In order to test the common libraries I've implemented 2 simple applications:
  * `node-app` - A Node JS application
  * `jvm-app` - A Java main class.
 
-For the *js* module I suggest to build the library locally using command:
+For the *js* module I suggest to build the library locally using command (you need npm):
 
     npm install -g
-
-Then on *node-app* folder install dependencies and run the application:
-
-    npm install -g && npm start
 
 #### 3.1 JVM Application
 A simple standalone java application has been created:
@@ -182,7 +178,11 @@ In the following abstract the interaction with the npm library:
     console.log(greeting.template.helloWorld("Lorenzo", "Martino"));
     ...
     
-Running the application the following output is shown:
+Installing dependencies and running the application:
+    
+    npm install -g && npm start
+
+The following output is shown:
 
     > node-app@0.0.0 start C:\Users\eomlrar\gitlab\multiplatform-templates-poc\node-app
     > node ./bin/www
