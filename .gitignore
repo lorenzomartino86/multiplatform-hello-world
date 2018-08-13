@@ -1,0 +1,10 @@
+.idea
+.gradle
+*.iml
+*.xml
+node_modules
+gradle
+gradlew
+gradlew.bat
+build
+index
