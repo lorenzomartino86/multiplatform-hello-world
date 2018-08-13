@@ -1,5 +1,6 @@
 package template.jvm;
 
+
 import static template.HelloWorldKt.helloWorld;
 
 public class HelloWorldJVM {
