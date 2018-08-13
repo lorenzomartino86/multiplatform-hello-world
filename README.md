@@ -1,5 +1,5 @@
 # Multiplatform project in Kotlin
-Kotlin multiplatform allows developer to write common code once and enable targeting on different platforms. 
+Kotlin multiplatform allows developers to write common code once and enables targeting on different platforms. 
 Core logic can be written in one place regardless of the platform using the mechanism of expected/actual paradigm 
 in which the core module defines *expected declarations*  and the platform specific modules provide the *actual declarations*. 
 
@@ -9,12 +9,26 @@ in which the core module defines *expected declarations*  and the platform speci
 
 ### 2. Multiplatform library for Node/JVM 
 The multiplatform library include three subprojects that will be used by both NodeJS and JVM applications:
- * `common` - contains the common logic for both applications;
- * `js` - contains an Javascript specific implementation that can be imported as npm package in Node application;
- * `jvm` - contains a JVM specific implementation that can be imported by SpringBoot applications.
+ * `common` - contains  common logic for both applications;
+ * `js` - contains Javascript specific implementation that can be imported as npm package in Node application;
+ * `jvm` - contains JVM specific implementation that can be imported by JVM applications.
  
 #### 2.1 Common subproject
 The `common` subproject contains a platform-independent code. 
+The build in gradle uses *kotlin-platform-common* plugin:
+
+    plugins {
+        id 'kotlin-platform-common' version '1.2.51'
+    }
+    repositories {
+        mavenCentral()
+    }
+    
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-common"
+        testCompile "org.jetbrains.kotlin:kotlin-test-annotations-common"
+        testCompile "org.jetbrains.kotlin:kotlin-test-common"
+    }
 
 Create a `HelloWorld` class with the expected declaration *greeting*: 
 
@@ -35,7 +49,31 @@ Then create a `HelloWorldTemplate` class with the shared feature:
     }
     
 #### 2.2 JVM subproject
-The `jvm` subproject contains a JVM-specific code. 
+The `jvm` subproject contains a JVM-specific code. The build targets a JDK8 artifact using *kotlin-platform-jvm* plugin:
+
+    plugins {
+        id 'kotlin-platform-jvm' version '1.2.51'
+        id 'java-library'
+    }
+    repositories {
+        mavenCentral()
+    }
+    
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        expectedBy project(":common")
+        testCompile "junit:junit:4.12"
+        testCompile "org.jetbrains.kotlin:kotlin-test"
+        testCompile "org.jetbrains.kotlin:kotlin-test-junit"
+    }
+    
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+    sourceCompatibility = "1.8"
 
 Create a `HelloWorld` class with the actual implementations: 
 
@@ -53,7 +91,37 @@ Create a `HelloWorld` class with the actual implementations:
     }
 
 #### 2.3 Javascript subproject
-The `js` subproject contains a Javascript-specific code. 
+The `js` subproject contains a Javascript-specific code. The build targets a javascript artifact using *kotlin-platform-js* plugin:
+
+    plugins {
+        id 'kotlin-platform-js' version '1.2.51'
+    }
+    repositories {
+        mavenCentral()
+    }
+    
+    compileKotlin2Js {
+        kotlinOptions.outputFile = "${projectDir}/index.js"
+        kotlinOptions.metaInfo = true
+        kotlinOptions.sourceMap = true
+        kotlinOptions.suppressWarnings = true
+        kotlinOptions.verbose = true
+        kotlinOptions.moduleKind = "commonjs"
+    }
+    
+    compileTestKotlin2Js {
+        kotlinOptions.metaInfo = true
+        kotlinOptions.sourceMap = true
+        kotlinOptions.suppressWarnings = true
+        kotlinOptions.verbose = true
+        kotlinOptions.moduleKind = "commonjs"
+    }
+    
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-js"
+        expectedBy project(":common")
+        testCompile "org.jetbrains.kotlin:kotlin-test-js"
+    }
 
 Create a `HelloWorld` class with the actual implementations: 
 
