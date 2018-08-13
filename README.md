@@ -1,17 +1,15 @@
 # Multiplatform project in Kotlin
-One of the key capabilities of Kotlin's multiplatform code is a way for common code to depend on platform-specific declarations. 
-Kotlin provides a mechanism of expected and actual declarations in which one module can define *expected declarations* and a platform specific module can provide the *actual declarations*.
-
-Code, common amongst multiple platforms can be placed in common modules, while platform-specific code could be placed
-into platform-specific modules, and expect/actual declarations can bind them together in developer-friendly way.
+Kotlin multiplatform allows developer to write common code once and enable targeting on different platforms. 
+Core logic can be written in one place regardless of the platform using the mechanism of expected/actual paradigm 
+in which the core module defines *expected declarations*  and the platform specific modules provide the *actual declarations*. 
 
 ## Prerequisites
 - `Kotlin` version 1.2.51.
 - `Gradle` is the used build system ([how to install](https://gradle.org/install/)).
 
 ### 2. Multiplatform library for Node/JVM 
-The multiplatform library will include three subprojects:
- * `common` - contains a common logic for both applications;
+The multiplatform library include three subprojects that will be used by both NodeJS and JVM applications:
+ * `common` - contains the common logic for both applications;
  * `js` - contains an Javascript specific implementation that can be imported as npm package in Node application;
  * `jvm` - contains a JVM specific implementation that can be imported by SpringBoot applications.
  
