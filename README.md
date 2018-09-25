@@ -1,7 +1,7 @@
 # Multiplatform project in Kotlin
 Kotlin multiplatform allows developers to write common code once and enables targeting on different platforms. 
 Core logic can be written in one place regardless of the platform using the mechanism of expected/actual paradigm 
-in which the core module defines *expected declarations*  and the platform specific modules provide the *actual declarations*. 
+in which the core module defines *expected declarations*  and the platform specific modules provide the *actual declarations*. (Suggested lecture [here](https://blog.kotlin-academy.com/architecture-for-multiplatform-development-in-kotlin-cc770f4abdfd) and a more complex github repo [here](https://github.com/MarcinMoskala/KotAcademyPortal))
 
 ## Prerequisites
 - `Kotlin` version 1.2.51.
